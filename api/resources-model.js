@@ -4,7 +4,7 @@ module.exports = {
     find,
     insert,
     findById,
-    //update,
+    update,
     remove
 };
 
@@ -30,6 +30,17 @@ function insert(resource) {
     return db('resources')
         .insert(resource)
         .then(ids => ({ id: ids[0] }));
+}
+
+
+function update(id, changes) {
+    return db('resources')
+        .where({ id })
+        .update(changes)
+        .then(() => {
+            return findById(id)
+        });
+
 }
 
 function remove(id) {
