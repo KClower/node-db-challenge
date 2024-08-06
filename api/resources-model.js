@@ -4,51 +4,37 @@ module.exports = {
     find,
     insert,
     findById,
-    update,
+    //update,
     remove
 };
 
 
 
 function find() {
-    return db('projects')
+    return db('resources');
 }
 
 async function findById(id) {
-    const project = await db('projects')
+    const resource = await db('resources')
         .select('*')
         .where({ id })
         .first();
 
-    if (!project) {
+    if (!resource) {
         return null
     }
-    return project
+    return resource
 }
 
-function update(id, changes) {
-    return db('projects')
-        .where({ id })
-        .update(changes);
-
-}
-
-function insert(project) {
-    return db('projects')
-        .insert(project)
+function insert(resource) {
+    return db('resources')
+        .insert(resource)
         .then(ids => ({ id: ids[0] }));
 }
 
 function remove(id) {
-    return db('Projects')
+    return db('resources')
         .where({ id })
         .del()
 }
-
-
-
-
-
-
-
 
