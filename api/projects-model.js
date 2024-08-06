@@ -29,7 +29,10 @@ async function findById(id) {
 function update(id, changes) {
     return db('projects')
         .where({ id })
-        .update(changes);
+        .update(changes)
+        .then(() => {
+            return findById(id)
+        });
 
 }
 
